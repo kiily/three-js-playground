@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>My first three.js app</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="js/three.js"></script>
+    <script>
+      var scene, camera, renderer, cube;
+      function init() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(
+          75, // Field of view
+          window.innerWidth / window.innerHeight, // Aspect ratio
+          0.1, // Clipping plane (far)
+          1000 // Clipping plane (near)
+        );
+        renderer = new THREE.WebGLRenderer();
+        // Set renderer size
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        // Add renderer to html document body element
+        document.body.appendChild(renderer.domElement);
+      }
+
+      function addCube() {
+        // Create box geometric objects
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        // Combine geometry with material to create the cuve
+        cube = new THREE.Mesh(geometry, material);
+        // Add the cube to the scene
+        scene.add(cube);
+        // Set the camera position
+        camera.position.z = 5;
+      }
+
+      function animate() {
+        // Get the frame
+        requestAnimationFrame(render);
+        // Animate the cube
+        cube.rotation.x += 0.05;
+        // cube.rotation.y += 0.1;
+        // Render the scene
+        renderer.render(scene, camera);
+      }
+      init();
+      addCube();
+      animate();
+    </script>
+  </body>
+</html>
